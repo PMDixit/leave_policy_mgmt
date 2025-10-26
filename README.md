@@ -199,7 +199,7 @@ curl -X POST "http://localhost:8000/api/v1/leave/application/" \
   }'
 ```
 
-As Per The Given UI: 
+### As Per The Given UI: 
 
 Create Policy: `POST: /api/v1/policy/`
 
