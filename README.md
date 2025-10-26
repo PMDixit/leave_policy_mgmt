@@ -2,6 +2,10 @@
 
 A comprehensive Django-based REST API for managing leave policies and applications in a multi-tenant microservice architecture. This system implements secure APIs for HR managers to create/configure leave policies and for employees to apply for leave with automated validation, multi-level approval workflows, and comprehensive business rule enforcement.
 
+### ERD
+<img width="1377" height="942" alt="image" src="https://github.com/user-attachments/assets/bfeb503a-faff-43a6-b144-331d275e3ad1" />
+
+
 ## Setup Instructions
 
 ### Prerequisites
