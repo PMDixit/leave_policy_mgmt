@@ -83,6 +83,11 @@ Notes:
 
 ## API Documentation
 
+Interactive API docs available at `/api/v1/docs/` (Swagger UI) and `/api/v1/redoc/` (ReDoc)
+<img width="1920" height="1076" alt="image" src="https://github.com/user-attachments/assets/a57c7bd7-ca4f-419a-8bcb-84cf989561eb" />
+
+<img width="1920" height="1076" alt="image" src="https://github.com/user-attachments/assets/704d21d4-0633-4908-bcd5-1cbf52c4f2eb" />
+
 ### Authentication
 All API endpoints require JWT authentication via Bearer token in the Authorization header.
 
@@ -288,12 +293,6 @@ poetry run python manage.py test
 
 ### API Schema
 Access the OpenAPI schema at `/api/v1/schema/`
-
-### API Documentation
-Interactive API docs available at `/api/v1/docs/` (Swagger UI) and `/api/v1/redoc/` (ReDoc)
-<img width="1920" height="1076" alt="image" src="https://github.com/user-attachments/assets/a57c7bd7-ca4f-419a-8bcb-84cf989561eb" />
-
-<img width="1920" height="1076" alt="image" src="https://github.com/user-attachments/assets/704d21d4-0633-4908-bcd5-1cbf52c4f2eb" />
 
 
 ## Deployment
