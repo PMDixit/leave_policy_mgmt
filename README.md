@@ -2,34 +2,6 @@
 
 A comprehensive Django-based REST API for managing leave policies and applications in a multi-tenant microservice architecture. This system implements secure APIs for HR managers to create/configure leave policies and for employees to apply for leave with automated validation, multi-level approval workflows, and comprehensive business rule enforcement.
 
-## Features
-
-### Policy Management
-- ✅ Multi-tenant leave policy creation and management
-- ✅ Auto-versioning for policy modifications
-- ✅ Hierarchical approval workflows (HR Manager → CHRO)
-- ✅ Configurable leave entitlements and restrictions
-- ✅ Policy applicability based on roles/departments
-- ✅ Policy exclusions for specific roles
-- ✅ Support for Annual, Sick, Casual, Maternity, Paternity, Sabbatical, Unpaid leave types
-
-### Leave Applications
-- ✅ Employee leave application submission with comprehensive validation
-- ✅ Automated policy selection and validation
-- ✅ Date range validation with half-day support
-- ✅ Document requirement enforcement based on leave type/duration
-- ✅ Multi-level approval routing based on organizational hierarchy
-- ✅ Real-time leave balance tracking and validation
-- ✅ Employee self-cancellation for pending applications
-- ✅ Complete audit trail with comments and status history
-
-### Security & Architecture
-- ✅ Multi-tenancy support with tenant isolation
-- ✅ JWT token-based authentication (external auth service integration)
-- ✅ Role-based permissions (HR Admin, Policy Manager, Employee)
-- ✅ Comprehensive input validation and business rule enforcement
-- ✅ Audit logging for all leave transactions
-
 ## Setup Instructions
 
 ### Prerequisites
@@ -227,6 +199,35 @@ curl -X POST "http://localhost:8000/api/v1/leave/application/" \
   }'
 ```
 
+As Per The Given UI: 
+
+Create Policy: `POST: /api/v1/policy/`
+
+Policy List Page: `GET: /api/v1/policy/`
+
+View Individual Policy: `GET: /api/v1/policy/{id}/`
+
+Edit Policy: `PUT/PATCH: /api/v1/policy/{id}/`
+
+Apply Leave: 
+  1. GET Leave Category: `GET: /api/v1/leave/category/`
+  2. GET Policies On Category: `GET: /api/v1/policy?leave_category={id}`
+  3. GET Leave Balance: `GET: /api/v1/leave/balance?leave_category_id={id}&employee_id={emp_id}&year={year}`
+  4. CREATE Leave Application: `POST: /api/v1/leave/application/`
+
+Leave Approval With Comment:
+  1. GET Pending Applications: `GET: /api/v1/leave/application?status=pending`
+  2. View Application Details: `GET: /api/v1/leave/application/{id}/`
+  3. GET Application Comments: `GET: /api/v1/leave/application-comment/{id}/comments/`
+  4. ADD Comment: `POST: /api/v1/leave/application-comment/{id}/add_comment/`
+  5. APPROVE Application: `POST: /api/v1/leave/approval/{id}/approve/`
+  6. REJECT Application: `POST: /api/v1/leave/approval/{id}/reject/`
+
+Authentication:
+  - All endpoints require JWT token in Authorization header
+  - Format: `Bearer {token}`
+  - External authentication service integration
+
 ## Project Structure
 
 ```
@@ -292,37 +293,6 @@ leave_policy_mgmt/
 
 ## Business Rules Implemented
 
-### Policy Validation Rules
-- Auto-versioning for policy modifications
-- Carry forward cannot exceed 365 days
-- Encashment cannot exceed carry forward limit
-- Hierarchical approval workflows (HR Manager → CHRO)
-- Employment duration validation (years, months, days)
-- Policy applicability based on employee roles/departments
-- Policy exclusions for specific roles
-
-### Leave Application Validation Rules
-- **Date Validation**: Start date ≤ end date, dates not in past
-- **Total Days Calculation**: Automatic validation against date range
-- **Half-day Support**: 0.5 days for half-day applications
-- **Balance Validation**: Sufficient leave balance for annual leave
-- **Document Requirements**: Automatic based on leave type and duration
-  - Sick leave > 3 days requires medical certificate
-  - Category-based documentation thresholds
-- **Overlapping Leave Prevention**: No concurrent leave applications
-- **Monthly Limits**: Configurable applications per month per category
-- **Notice Period Requirements**: Minimum advance notice
-- **Employment Restrictions**: Role-based leave restrictions
-- **Blackout Periods**: Configurable date restrictions
-
-### Application Workflow
-- **Status Flow**: Draft → Pending → Approved/Approved (unpaid)/Rejected/Cancelled
-- **Employee Cancellation**: Only pending/draft applications can be cancelled by employees
-- **Multi-level Approval**: Based on organizational hierarchy and policy rules
-- **Automatic Balance Deduction**: On approval (for paid leave types)
-- **Unpaid Leave Support**: Special "Approved (unpaid)" status for unpaid leave types
-- **Audit Trail**: Complete history of status changes, comments, and approver actions
-
 ### Multi-tenancy & Security
 - Complete tenant isolation at database level
 - JWT token validation with external auth service
@@ -348,42 +318,6 @@ Interactive API docs available at `/api/v1/docs/` (Swagger UI) and `/api/v1/redo
 ### Environment Variables
 Copy and customize the `.env.example` file for your environment. Refer to the file for all available configuration options.
 
-### CORS and CSRF Configuration
-The application includes configurable CORS and CSRF settings for secure frontend integration:
-
-- **`CORS_ALLOWED_ORIGINS`**: Comma-separated list of allowed origins (e.g., your React/Vue frontend URLs)
-- **`CORS_ALLOW_CREDENTIALS`**: Enable/disable credentials in CORS requests
-- **`CSRF_TRUSTED_ORIGINS`**: Comma-separated list of trusted origins for CSRF protection
-- **`CSRF_COOKIE_SECURE`**: Use secure CSRF cookies (set to `True` in production with HTTPS)
-
-**Development defaults:**
-```bash
-CORS_ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000,http://localhost:8080,http://127.0.0.1:8080
-CORS_ALLOW_CREDENTIALS=True
-CSRF_TRUSTED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000,http://localhost:8080,http://127.0.0.1:8080
-CSRF_COOKIE_SECURE=False
-```
-
-**Production example:**
-```bash
-CORS_ALLOWED_ORIGINS=https://your-frontend-domain.com,https://www.your-frontend-domain.com
-CORS_ALLOW_CREDENTIALS=True
-CSRF_TRUSTED_ORIGINS=https://your-frontend-domain.com,https://www.your-frontend-domain.com
-CSRF_COOKIE_SECURE=True
-```
-
-### Production Deployment
-1. Set DEBUG=False
-2. Use PostgreSQL database
-3. Configure proper ALLOWED_HOSTS
-4. Set up proper logging
-5. Enable SSL/HTTPS
-6. Configure static file serving
-
-## License
-
-This project is licensed under the MIT License.
-
 ## Development
 
 ### Running Tests
@@ -392,18 +326,7 @@ This project is licensed under the MIT License.
 poetry run python manage.py test
 ```
 
-### Code Formatting
 
-```bash
-poetry run black .
-poetry run isort .
-```
-
-### Linting
-
-```bash
-poetry run flake8 .
-```
 
 ### API Schema & Documentation
 
@@ -419,33 +342,3 @@ The project supports multiple environments:
 - Production (PostgreSQL with SSL)
 
 Set the appropriate settings module using the `DJANGO_SETTINGS_MODULE` environment variable.
-
-
-As Per UI: 
-
-Create Policy: `POST: /api/v1/policy/`
-
-Policy List Page: `GET: /api/v1/policy/`
-
-View Individual Policy: `GET: /api/v1/policy/{id}/`
-
-Edit Policy: `PUT/PATCH: /api/v1/policy/{id}/`
-
-Apply Leave: 
-  1. GET Leave Category: `GET: /api/v1/leave/category/`
-  2. GET Policies On Category: `GET: /api/v1/policy?leave_category={id}`
-  3. GET Leave Balance: `GET: /api/v1/leave/balance?leave_category_id={id}&employee_id={emp_id}&year={year}`
-  4. CREATE Leave Application: `POST: /api/v1/leave/application/`
-
-Leave Approval With Comment:
-  1. GET Pending Applications: `GET: /api/v1/leave/application?status=pending`
-  2. View Application Details: `GET: /api/v1/leave/application/{id}/`
-  3. GET Application Comments: `GET: /api/v1/leave/application-comment/{id}/comments/`
-  4. ADD Comment: `POST: /api/v1/leave/application-comment/{id}/add_comment/`
-  5. APPROVE Application: `POST: /api/v1/leave/approval/{id}/approve/`
-  6. REJECT Application: `POST: /api/v1/leave/approval/{id}/reject/`
-
-Authentication:
-  - All endpoints require JWT token in Authorization header
-  - Format: `Bearer {token}`
-  - External authentication service integration
