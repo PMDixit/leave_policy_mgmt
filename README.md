@@ -148,23 +148,7 @@ https://your-domain.com/api/v1/
 curl -X POST "http://localhost:8000/api/v1/policy/policy/" \
   -H "Authorization: Bearer YOUR_JWT_TOKEN" \
   -H "Content-Type: application/json" \
-  -d '{
-    "policy_name": "Annual Leave Policy 2024",
-    "policy_type": "leave_time_off",
-    "description": "Standard annual leave policy",
-    "entitlement": ["Permanent"],
-    "employment_duration_years": 1,
-    "employment_duration_months": 0,
-    "employment_duration_days": 0,
-    "carry_forward": 5,
-    "encashment": 5,
-    "notice_period": 3,
-    "limit_per_month": 2,
-    "approval_route": [
-      {"approver_id": "hr-manager-id", "approver_name": "HR Manager", "approver_role": "HR Manager"},
-      {"approver_id": "chro-id", "approver_name": "Chief HR Officer", "approver_role": "CHRO"}
-    ]
-  }'
+  -d "body"
 ```
 
 #### Submit a Leave Application
