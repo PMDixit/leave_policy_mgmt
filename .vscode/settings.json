@@ -1,0 +1,52 @@
+{
+    "files.exclude": {
+      "**/__pycache__": true,
+      "**/*.pyc": true,
+      "**/*.pyo": true,
+      ".venv": true,
+      ".pytest_cache": true,
+      ".mypy_cache": true,
+      ".ruff_cache": true,
+      "dist": true,
+      "build": true
+    },
+    "search.exclude": {
+      "**/__pycache__": true,
+      ".venv": true,
+      ".pytest_cache": true,
+      ".mypy_cache": true,
+      ".ruff_cache": true,
+      "dist": true,
+      "build": true
+    },
+    "files.watcherExclude": {
+      "**/__pycache__/**": true,
+      ".venv/**": true,
+      ".pytest_cache/**": true,
+      ".mypy_cache/**": true,
+      ".ruff_cache/**": true,
+      "dist/**": true,
+      "build/**": true
+    },
+    "python.analysis.exclude": [
+      "**/__pycache__",
+      ".venv",
+      ".pytest_cache",
+      ".mypy_cache",
+      ".ruff_cache",
+      "dist",
+      "build"
+    ],
+    "editor.rulers": [120],
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 120,
+    "cursorpyright.analysis.exclude": [
+      "**/__pycache__",
+      ".venv",
+      ".pytest_cache",
+      ".mypy_cache",
+      ".ruff_cache",
+      "dist",
+      "build"
+    ]
+  }

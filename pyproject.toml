@@ -1,0 +1,38 @@
+[project]
+name = "leave-policy-microservice"
+version = "0.1.0"
+description = "Leave Policy Management API microservice for multi-tenant leave management"
+authors = [
+    {name = "Prajwal M Dixit",email = "prajwalmdixit@gmail.com"}
+]
+readme = "README.md"
+requires-python = "^3.13"
+
+dependencies = [
+    "django (>=5.2.7,<6.0.0)",
+    "djangorestframework (>=3.16.1,<4.0.0)",
+    "psycopg2-binary (>=2.9.11,<3.0.0)",
+    "python-decouple (>=3.8,<4.0)",
+    "django-multitenant (>=4.1.1,<5.0.0)",
+    "django-filter (>=25.2,<26.0)",
+    "drf-spectacular (>=0.28.0,<0.29.0)",
+    "django-cors-headers (>=4.9.0,<5.0.0)",
+    "requests (>=2.32.5,<3.0.0)",
+    "gunicorn (>=23.0.0,<24.0.0)"
+]
+
+[project.optional-dependencies]
+dev = [
+    "factory-boy (>=3.3.0,<4.0.0)",
+    "faker (>=37.0.0,<38.0.0)"
+]
+
+
+[tool.poetry]
+package-mode = false
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
