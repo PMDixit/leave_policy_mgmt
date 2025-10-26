@@ -148,7 +148,9 @@ https://your-domain.com/api/v1/
 curl -X POST "http://localhost:8000/api/v1/policy/policy/" \
   -H "Authorization: Bearer YOUR_JWT_TOKEN" \
   -H "Content-Type: application/json" \
-  -d "body"
+  -d '{
+    "data":"data"
+  }'
 ```
 
 #### Submit a Leave Application
@@ -157,13 +159,7 @@ curl -X POST "http://localhost:8000/api/v1/leave/application/" \
   -H "Authorization: Bearer YOUR_JWT_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "leave_category_id": "annual-category-uuid",
-    "start_date": "2024-12-01",
-    "end_date": "2024-12-05",
-    "total_days": 5,
-    "is_half_day": false,
-    "reason": "Family vacation",
-    "document_url": "https://example.com/medical-cert.pdf"
+    "data":"data"
   }'
 ```
 
