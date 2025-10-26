@@ -77,27 +77,6 @@ docker-compose up --build
 - API base: `http://localhost:8000/api/v1/`
 - Admin: `http://localhost:8000/admin/`
 
-### Useful commands
-- Rebuild after code changes: `docker-compose up --build`
-- Tail logs: `docker-compose logs -f app` (or `nginx`, `db`)
-- Create superuser:
-  ```bash
-  docker-compose exec app python manage.py createsuperuser --settings=config.settings.development
-  ```
-- Stop: `docker-compose down`
-- Stop and remove volumes (DB/static/media): `docker-compose down -v`
-
-### Environment overrides (optional)
-docker-compose already sets sane dev defaults. You can override via environment variables or `.env`:
-```bash
-DEBUG=True
-DJANGO_SETTINGS_MODULE=config.settings.development
-DB_NAME=leave_policy_db
-DB_USER=postgres
-DB_PASSWORD=password
-ALLOWED_HOSTS=app,localhost,127.0.0.1
-```
-
 Notes:
 - nginx is exposed on host port 8000 and proxies to the Django app on port 8000.
 - Static files are served by nginx from the shared `staticfiles` volume.
@@ -312,6 +291,10 @@ Access the OpenAPI schema at `/api/v1/schema/`
 
 ### API Documentation
 Interactive API docs available at `/api/v1/docs/` (Swagger UI) and `/api/v1/redoc/` (ReDoc)
+<img width="1920" height="1076" alt="image" src="https://github.com/user-attachments/assets/a57c7bd7-ca4f-419a-8bcb-84cf989561eb" />
+
+<img width="1920" height="1076" alt="image" src="https://github.com/user-attachments/assets/704d21d4-0633-4908-bcd5-1cbf52c4f2eb" />
+
 
 ## Deployment
 
